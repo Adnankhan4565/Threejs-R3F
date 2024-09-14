@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
