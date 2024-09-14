@@ -1,7 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { OrbitControls } from "@react-three/drei";
+import {
+  Html,
+  OrbitControls,
+  PivotControls,
+  TransformControls,
+} from "@react-three/drei";
 
 // import CustomObject from "./CustomObject";
 
@@ -20,20 +25,30 @@ function App() {
 
   return (
     <>
-      <OrbitControls />
+      <OrbitControls makeDefault />
       <directionalLight position={[1, 2, 3]} intensity={1.5} />
       <ambientLight intensity={0.5} />
 
       <group ref={sceneRef}>
-        <mesh position-x={-2}>
-          <sphereGeometry scale={1.5} />
-          <meshStandardMaterial color={"hotpink"} />
-        </mesh>
+        <PivotControls
+          anchor={[0, 0, 0]}
+          depthTest={false}
+          lineWidth={4}
+          axisColors={["#9381ff", "#ff4d6d", "#78e582"]}
+          scale={2}
+        >
+          <mesh position-x={-2}>
+            <sphereGeometry scale={1.5} />
+            <meshStandardMaterial color={"hotpink"} />
+          </mesh>
+        </PivotControls>
 
-        <mesh ref={cubeRef} position-x={2} scale={1.5}>
-          <boxGeometry scale={1.5} />
-          <meshStandardMaterial color={"mediumpurple"} />
-        </mesh>
+        <TransformControls position-x={2}>
+          <mesh ref={cubeRef} scale={1.5}>
+            <boxGeometry scale={1.5} />
+            <meshStandardMaterial color={"mediumpurple"} />
+          </mesh>
+        </TransformControls>
       </group>
 
       <mesh rotation-x={-Math.PI * 0.5} position-y={-1} scale={10}>
@@ -41,6 +56,7 @@ function App() {
         <meshStandardMaterial color={"lightgreen"} />
       </mesh>
 
+      <Html> Test</Html>
       {/* <CustomObject /> */}
     </>
   );
