@@ -2,10 +2,12 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import {
+  Text,
   Html,
   OrbitControls,
   PivotControls,
   TransformControls,
+  MeshReflectorMaterial,
 } from "@react-three/drei";
 
 // import CustomObject from "./CustomObject";
@@ -53,11 +55,20 @@ function App() {
 
       <mesh rotation-x={-Math.PI * 0.5} position-y={-1} scale={10}>
         <planeGeometry />
-        <meshStandardMaterial color={"lightgreen"} />
+        {/* <meshStandardMaterial color={"lightgreen"} /> */}
+        <MeshReflectorMaterial
+          resolution={512}
+          blur={[1000, 1000]}
+          mixBlur={1}
+          mirror={0.5}
+        />
       </mesh>
 
-      <Html> Test</Html>
+      {/* <Html>Test</Html> */}
       {/* <CustomObject /> */}
+      <Text fontSize={0.5} position-y={2} color={"salmon"}>
+        Hello
+      </Text>
     </>
   );
 }
