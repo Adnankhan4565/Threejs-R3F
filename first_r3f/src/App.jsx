@@ -1,13 +1,11 @@
 /* eslint-disable react/no-unknown-property */
-// import "./App.css";
-import { extend, useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import CustomObject from "./CustomObject";
-extend({ OrbitControls });
+import { OrbitControls } from "@react-three/drei";
+
+// import CustomObject from "./CustomObject";
 
 function App() {
-  const { camera, gl } = useThree();
   const cubeRef = useRef();
   const sceneRef = useRef();
 
@@ -22,8 +20,7 @@ function App() {
 
   return (
     <>
-      <orbitControls args={[camera, gl.domElement]} />
-
+      <OrbitControls />
       <directionalLight position={[1, 2, 3]} intensity={1.5} />
       <ambientLight intensity={0.5} />
 
@@ -44,7 +41,7 @@ function App() {
         <meshStandardMaterial color={"lightgreen"} />
       </mesh>
 
-      <CustomObject />
+      {/* <CustomObject /> */}
     </>
   );
 }
