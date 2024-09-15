@@ -9,10 +9,20 @@ import {
   MeshReflectorMaterial,
   Float,
 } from "@react-three/drei";
+import { useControls } from "leva";
 
 // import CustomObject from "./CustomObject";
 
 function App() {
+  const { position, color } = useControls({
+    position: {
+      value: { x: -2, y: 0, z: 0 },
+      step: 0.01,
+    },
+    color: "#ff0000",
+  });
+  console.log(position, color);
+
   const cubeRef = useRef();
   const sceneRef = useRef();
 
