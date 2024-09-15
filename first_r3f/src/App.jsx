@@ -3,7 +3,6 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import {
   Text,
-  Html,
   OrbitControls,
   PivotControls,
   TransformControls,
