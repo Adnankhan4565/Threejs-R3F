@@ -8,6 +8,7 @@ import {
   PivotControls,
   TransformControls,
   MeshReflectorMaterial,
+  Float,
 } from "@react-three/drei";
 
 // import CustomObject from "./CustomObject";
@@ -66,9 +67,11 @@ function App() {
 
       {/* <Html>Test</Html> */}
       {/* <CustomObject /> */}
-      <Text fontSize={0.5} position-y={2} color={"salmon"}>
-        Hello
-      </Text>
+      <Float speed={5} intensity={0.5}>
+        <Text fontSize={0.5} position-y={2} color={"salmon"}>
+          Hello
+        </Text>
+      </Float>
     </>
   );
 }
