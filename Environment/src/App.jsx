@@ -5,6 +5,7 @@ import {
   OrbitControls,
   Environment,
   useHelper,
+  Stage,
 } from "@react-three/drei";
 import { useRef } from "react";
 import { Perf } from "r3f-perf";
@@ -24,27 +25,42 @@ function App() {
   });
 
   const { color, opacity, blur } = useControls("Contact Shadows", {
-    color: "#000000",
-    opacity: { value: 0.5, min: 0, max: 1 },
-    blur: { value: 1, min: 0, max: 10 },
+    color: "#1dbf75",
+    opacity: { value: 0.4, min: 0, max: 1 },
+    blur: { value: 2.8, min: 0, max: 10 },
   });
 
-  const { envMapIntensity } = useControls("Env", {
-    envMapIntensity: { value: 1, min: 0, max: 12 },
-  });
+  const { envMapIntensity, envMapHeight, envMapRadius, envMapScale } =
+    useControls("Env", {
+      envMapIntensity: { value: 1, min: 0, max: 12 },
+      envMapHeight: { value: 7, min: 0, max: 100 },
+      envMapRadius: { value: 28, min: 10, max: 1000 },
+      envMapScale: { value: 100, min: 10, max: 1000 },
+    });
   return (
     <>
-      <Environment
-        background
-        // files={"./environmentMaps/the_sky_is_on_fire_2k.hdr"}
-        // preset="sunset"
-      >
-        <color args={["black"]} attach="background" />
-        <mesh position-z={-5} scale={10}>
+      {/* <Environment
+        environmentIntensity={envMapIntensity}
+        preset="sunset"
+        ground={{
+          height: envMapHeight,
+          radius: envMapRadius,
+          scale: envMapScale,
+        }}
+      > */}
+      {/* <color args={["black"]} attach="background" />
+        <Lightformer
+          position-z={-5}
+          scale={10}
+          color={"red"}
+          intensity={10}
+          form={"ring"}
+        /> */}
+      {/* <mesh position-z={-5} scale={10}>
           <planeGeometry />
-          <meshBasicMaterial color="red" />
-        </mesh>
-      </Environment>
+          <meshBasicMaterial color={[10, 0, 0]} />
+        </mesh> */}
+      {/* </Environment> */}
       {/* <SoftShadows /> */}
       {/* <Sky sunPosition={sunPosition} /> */}
 
@@ -71,15 +87,16 @@ function App() {
         />
       </AccumulativeShadows> */}
 
-      <ContactShadows
-        position={[0, -0.99, 0]}
+      {/* <ContactShadows
+        position={[0, 0, 0]}
         scale={10}
         resolution={512}
         far={5}
         color={color}
         opacity={opacity}
         blur={blur}
-      />
+        frames={1}
+      /> */}
 
       {/* <directionalLight
         ref={directionalLight}
@@ -96,31 +113,40 @@ function App() {
       />
       <ambientLight intensity={0.5} /> */}
 
-      <mesh position-x={-2} castShadow>
+      {/* <mesh position-x={-2} position-y={1} castShadow>
         <sphereGeometry />
-        <meshStandardMaterial
-          color="orange"
-          envMapIntensity={envMapIntensity}
-        />
+        <meshStandardMaterial color="orange" />
       </mesh>
 
-      <mesh ref={cube} position-x={2} scale={1.5} castShadow>
+      <mesh ref={cube} position-x={2} position-y={1} scale={1.5} castShadow>
         <boxGeometry />
-        <meshStandardMaterial
-          color="mediumpurple"
-          envMapIntensity={envMapIntensity}
-        />
-      </mesh>
-
-      <mesh
-        position-y={-1}
-        rotation-x={-Math.PI * 0.5}
-        scale={10}
-        receiveShadow
+        <meshStandardMaterial color="mediumpurple" />
+      </mesh> */}
+      <Stage
+        shadows={{
+          type: "contact",
+          opacity: 0.2,
+          blur: 2,
+        }}
+        environment="sunset"
+        preset="portrait"
+        intensity={2}
       >
+        <mesh position-x={-2} position-y={1} castShadow>
+          <sphereGeometry />
+          <meshStandardMaterial color="orange" />
+        </mesh>
+
+        <mesh ref={cube} position-x={2} position-y={1} scale={1.5} castShadow>
+          <boxGeometry />
+          <meshStandardMaterial color="mediumpurple" />
+        </mesh>
+      </Stage>
+
+      {/* <mesh position-y={0} rotation-x={-Math.PI * 0.5} scale={10} receiveShadow>
         <planeGeometry />
-        <meshStandardMaterial color="greenyellow" envMapIntensity={3.5} />
-      </mesh>
+        <meshStandardMaterial color="greenyellow" />
+      </mesh> */}
     </>
   );
 }
