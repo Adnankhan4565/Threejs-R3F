@@ -31,7 +31,7 @@ export default function Hamburger(props) {
   }, []);
 
   return (
-    <group {...props} scale={0.5} dispose={null}>
+    <group {...props} scale={0.5} dispose={null} position-x={2}>
       <mesh
         ref={bottomBunRef}
         castShadow
