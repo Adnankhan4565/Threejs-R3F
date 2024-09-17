@@ -11,7 +11,6 @@ const created = ({ gl }) => {
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Canvas
-      shadows
       camera={{
         fov: 75,
         near: 0.1,
