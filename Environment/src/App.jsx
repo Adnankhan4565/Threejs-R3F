@@ -29,23 +29,25 @@ function App() {
     blur: { value: 1, min: 0, max: 10 },
   });
 
-  // const { sunPosition } = useControls("SKy", {
-  //   sunPosition: { value: [1, 2, 3] },
-  // });
+  const { envMapIntensity } = useControls("Env", {
+    envMapIntensity: { value: 1, min: 0, max: 12 },
+  });
   return (
     <>
       <Environment
-        files={[
-          "./environmentMaps/2/px.jpg",
-          "./environmentMaps/2/nx.jpg",
-          "./environmentMaps/2/py.jpg",
-          "./environmentMaps/2/ny.jpg",
-          "./environmentMaps/2/pz.jpg",
-          "./environmentMaps/2/nz.jpg",
-        ]}
-      />
+        background
+        // files={"./environmentMaps/the_sky_is_on_fire_2k.hdr"}
+        // preset="sunset"
+      >
+        <color args={["black"]} attach="background" />
+        <mesh position-z={-5} scale={10}>
+          <planeGeometry />
+          <meshBasicMaterial color="red" />
+        </mesh>
+      </Environment>
       {/* <SoftShadows /> */}
       {/* <Sky sunPosition={sunPosition} /> */}
+
       <Perf position="top-left" />
 
       <OrbitControls makeDefault />
@@ -96,12 +98,18 @@ function App() {
 
       <mesh position-x={-2} castShadow>
         <sphereGeometry />
-        <meshStandardMaterial color="orange" />
+        <meshStandardMaterial
+          color="orange"
+          envMapIntensity={envMapIntensity}
+        />
       </mesh>
 
       <mesh ref={cube} position-x={2} scale={1.5} castShadow>
         <boxGeometry />
-        <meshStandardMaterial color="mediumpurple" />
+        <meshStandardMaterial
+          color="mediumpurple"
+          envMapIntensity={envMapIntensity}
+        />
       </mesh>
 
       <mesh
@@ -111,7 +119,7 @@ function App() {
         receiveShadow
       >
         <planeGeometry />
-        <meshStandardMaterial color="greenyellow" />
+        <meshStandardMaterial color="greenyellow" envMapIntensity={3.5} />
       </mesh>
     </>
   );
